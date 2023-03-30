@@ -22,7 +22,7 @@ class HeaderWidget extends StatelessWidget {
           children: [
             const Text("Hi, Selamat datang"),
             Text(
-              user.name,
+              "Mrivaldi_2006114",
               style: const TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
@@ -235,20 +235,15 @@ class LatestNewsIndexCardSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ConstrainedBox(
-      constraints: const BoxConstraints.expand(
-        height: 300,
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          for (int i = 0; i < 2; i++)
-            LatestNewsCard(
-              size: size,
-              i: i,
-            ),
-        ],
-      ),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        for (int i = 0; i < 10; i++)
+          LatestNewsCard(
+            size: size,
+            i: i,
+          ),
+      ],
     );
   }
 }

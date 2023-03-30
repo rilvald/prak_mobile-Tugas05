@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:pertemuan_v/models/user.dart';
 
@@ -15,7 +17,18 @@ class HomeFragment extends StatefulWidget {
 }
 
 class _HomeFragmentState extends State<HomeFragment> {
+  final ScrollController _scrollController = ScrollController();
   late Size size;
+
+  @override
+  void initState() {
+    _scrollController.addListener(() {
+      _scrollController.offset.toString();
+      print("user sedang scroll");
+    });
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,51 +60,55 @@ class _HomeFragmentState extends State<HomeFragment> {
             height: 16,
           ),
           Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: 16,
+            child: SingleChildScrollView(
+              controller: _scrollController,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    child: SectionTitle(
+                      label: "Hotest News",
+                    ),
                   ),
-                  child: SectionTitle(
-                    label: "Hotest News",
+                  SizedBox(
+                    width: size.width,
+                    height: size.width * 0.5,
                   ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    child: HotestNewsCard(
+                      size: size,
+                      newsTitle: "Ini Adalah foto Rival :D",
+                      pictureUrl: "https://picsum.photos/1080/690",
+                    ),
                   ),
-                  child: HotestNewsCard(
-                    size: size,
-                    newsTitle: "Lebaran Sebentar Lagi",
-                    pictureUrl: "https://picsum.photos/1080/690",
+                  const SizedBox(
+                    height: 16,
                   ),
-                ),
-                const SizedBox(
-                  height: 16,
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16),
-                  child: SectionTitle(
-                    label: "Latest News",
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16),
+                    child: SectionTitle(
+                      label: "Latest News",
+                    ),
                   ),
-                ),
-                const SizedBox(
-                  height: 8,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
+                  const SizedBox(
+                    height: 8,
                   ),
-                  child: LatestNewsIndexCardSection(
-                    size: size,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    child: LatestNewsIndexCardSection(
+                      size: size,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
